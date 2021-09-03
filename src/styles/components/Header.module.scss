@@ -1,0 +1,14 @@
+@import "../functions.scss";
+@import "../colors.scss";
+
+.header {
+  @include DisplayFlex(row, center, normal);
+  width: 100%;
+  background-color: $green;
+  min-height: 50px;
+
+  a {
+    margin: 0 1rem;
+    color: $black;
+  }
+}

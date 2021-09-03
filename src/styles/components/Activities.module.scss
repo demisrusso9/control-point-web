@@ -1,0 +1,19 @@
+@import "../functions.scss";
+
+.activities {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 45px 1fr 1fr;
+
+  textarea {
+    @include HeightWidth(100px, 100%);
+    resize: none;
+    padding: 0.6rem;
+    letter-spacing: 0.6px;
+    font-size: 0.8rem;
+    outline: 0;
+    border: 0;
+    margin-top: 0.6rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 10px 1px;
+  }
+}

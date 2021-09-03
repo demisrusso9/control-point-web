@@ -1,0 +1,27 @@
+@import "../functions.scss";
+@import "../colors.scss";
+
+.inputBlock {
+  @include DisplayFlex(row, center, space-between);
+
+  input {
+    max-width: 6rem;
+    height: 20px;
+    font-size: 0.8rem;
+    text-align: center;
+    outline: 0;
+    transition: 0.3s;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+
+    &:focus {
+      border: none;
+      box-shadow: hsl(120, 50%, 80%) 0px 0px 5px 0px, hsl(120, 50%, 80%) 0px 0px 1px 0px;
+    }
+  }
+}
+
+.inputBlock + .inputBlock {
+  margin: 1rem 0;
+}

@@ -1,0 +1,114 @@
+@import "../functions.scss";
+@import "../colors.scss";
+
+.container {
+  @include DisplayFlex(row, center, center);
+  margin: 2.5rem;
+  background-color: $white;
+
+  .table {
+    min-width: 500px;
+    text-align: left;
+    font-family: "Nunito", sans-serif;
+    border-collapse: collapse;
+    background-color: $white;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+
+    thead,
+    tbody,
+    th,
+    td {
+      padding: 0.8rem 1rem;
+    }
+
+    thead tr {
+      background-color: $green;
+      color: $white;
+
+      th {
+        text-align: left;
+        font-weight: bold;
+        font-size: 0.9rem;
+
+        &:nth-child(1) {
+          min-width: 180px;
+        }
+        &:nth-child(2) {
+          min-width: 60px;
+        }
+        &:nth-child(3) {
+          min-width: 60px;
+        }
+        &:nth-child(4) {
+          min-width: 60px;
+        }
+        &:nth-child(5) {
+          min-width: 60px;
+        }
+        &:nth-child(6) {
+          min-width: 150px;
+        }
+        &:nth-child(7) {
+          min-width: 150px;
+        }
+      }
+    }
+
+    tbody tr {
+      font-size: 0.8rem;
+      transition: color 0.4s;
+      line-height: 17px;
+      border-bottom: 1px solid #ddd;
+
+      &:hover {
+        color: $green;
+      }
+
+      &:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      &:last-child {
+        border-bottom: 2px solid $green;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    margin: 2.5rem;
+  }
+  .container .table thead {
+    display: none;
+  }
+  .container .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .container .table tr {
+    margin-bottom: 2.5rem;
+  }
+  .container .table td {
+    text-align: right;
+    padding-left: 40%;
+    position: relative;
+
+    &::before {
+      padding-left: 1rem;
+      position: absolute;
+      left: 0;
+      content: attr(data-label);
+      text-align: left;
+      width: 50%;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+  }
+}

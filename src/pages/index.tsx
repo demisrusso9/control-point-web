@@ -1,8 +1,10 @@
 import React, { FormEvent, useState } from 'react'
-import api from '../service/api'
-import { ToastContainer, toast } from 'react-toastify'
+import axios from 'axios'
+import { ToastContainer, toast, ToastOptions } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import styles from '../styles/pages/Home.module.scss'
+
+import { notification } from '../utils/notifications'
 
 import { calculateTime, calculateHrsAndMin } from '../utils/calculateTime'
 import { ControlContext } from '../contexts/ControlContext'
@@ -32,23 +34,12 @@ export default function MyApp() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     add()
-    notification('Ponto adicionado')
-  }
-
-  const notification = (text: string) => {
-    toast.success(text, {
-      position: 'top-right',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined
-    })
+    notification('added', 'Ponto adicionado')
   }
 
   const add = () => {
-    api.post('/add', {
+    // Serverless Vercel
+    axios.post('api/create', {
       currentDate,
       morningEntry,
       morningExit,
@@ -57,6 +48,17 @@ export default function MyApp() {
       morningActivities,
       afternoonActivities
     })
+
+    // My backend
+    // api.post('/add', {
+    //   currentDate,
+    //   morningEntry,
+    //   morningExit,
+    //   afternoonEntry,
+    //   afternoonExit,
+    //   morningActivities,
+    //   afternoonActivities
+    // })
   }
 
   return (

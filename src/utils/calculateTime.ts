@@ -1,6 +1,6 @@
 const removeColon = (hour: string) => hour.replace(':', '')
 
-export const calculateTime = (hour1: string, hour2: string) => {
+export const getTotalMinutes = (hour1: string, hour2: string) => {
   // 08:30
   const hour1Part1 = removeColon(hour1).slice(0, 2) // 08
   const hour1Part2 = removeColon(hour1).slice(-2) // 30
@@ -18,9 +18,11 @@ export const calculateTime = (hour1: string, hour2: string) => {
   return totalMinutes
 }
 
-export const calculateHrsAndMin = (totalMinutes: number) => {
-  const minutes = (totalMinutes % 60)
+export const getHoursAndMinutes = (totalMinutes: number) => {
+  const minutes = totalMinutes % 60
   const hours = Math.floor(totalMinutes / 60)
 
-  return `${hours} ${hours > 1 ? 'horas' : 'hora'} e ${minutes} ${minutes > 1 ? 'minutos' : 'minuto'}`
+  return `${hours} ${hours > 1 ? 'horas' : 'hora'} e ${minutes} ${
+    minutes > 1 ? 'minutos' : 'minuto'
+  }`
 }

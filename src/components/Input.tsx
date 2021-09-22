@@ -16,7 +16,6 @@ export default function Input({ htmlFor, children, setData }: IProps) {
       <NumberFormatted
         id={htmlFor}
         format='##:##'
-        mask='-'
         placeholder='00:00'
         onChange={(e) => setData(e.target.value)}
         required

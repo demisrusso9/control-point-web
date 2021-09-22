@@ -1,17 +1,18 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useState, useEffect } from 'react'
 import axios from 'axios'
-import { ToastContainer, toast, ToastOptions } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import styles from '../styles/pages/Home.module.scss'
 
-import { notification } from '../utils/notifications'
-
-import { calculateTime, calculateHrsAndMin } from '../utils/calculateTime'
-import { ControlContext } from '../contexts/ControlContext'
 import Schedules from '../components/Schedules'
 import Information from '../components/Information'
 import Activities from '../components/Activities'
 import SelectInput from '../components/Select'
+
+import { notification } from '../utils/notifications'
+import { getTotalMinutes } from '../utils/calculateTime'
+import { ControlContext } from '../contexts/ControlContext'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+import styles from '../styles/pages/Home.module.scss'
 
 export default function MyApp() {
   // Entry and Exit
@@ -25,11 +26,13 @@ export default function MyApp() {
   const [morningActivities, setMorningActivities] = useState('')
   const [afternoonActivities, setAfternoonActivities] = useState('')
 
+  // Verify input to update information
+  const [verify, setVerify] = useState(0)
+
   // Calculate times
-  const lunch = calculateTime(morningExit, afternoonEntry)
-  const morning = calculateTime(morningEntry, morningExit)
-  const afternoon = calculateTime(afternoonEntry, afternoonExit)
-  const totalTime = calculateHrsAndMin(morning + afternoon)
+  const lunch = getTotalMinutes(morningExit, afternoonEntry)
+  const morning = getTotalMinutes(morningEntry, morningExit)
+  const afternoon = getTotalMinutes(afternoonEntry, afternoonExit)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -48,18 +51,18 @@ export default function MyApp() {
       morningActivities,
       afternoonActivities
     })
-
-    // My backend
-    // api.post('/add', {
-    //   currentDate,
-    //   morningEntry,
-    //   morningExit,
-    //   afternoonEntry,
-    //   afternoonExit,
-    //   morningActivities,
-    //   afternoonActivities
-    // })
   }
+
+  const verifyInputs = () => {
+    morningEntry && setVerify(verify + 1)
+    morningExit && setVerify(verify + 1)
+    afternoonEntry && setVerify(verify + 1)
+    afternoonExit && setVerify(verify + 1)
+  }
+
+  useEffect(() => {
+    verifyInputs()
+  }, [morningEntry, morningExit, afternoonEntry, afternoonExit])
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
@@ -77,7 +80,7 @@ export default function MyApp() {
             lunch,
             morning,
             afternoon,
-            totalTime
+            verify
           }}
         >
           <Schedules />

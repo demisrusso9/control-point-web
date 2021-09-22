@@ -1,61 +1,59 @@
 import React, { useContext } from 'react'
 import { ControlContext } from '../contexts/ControlContext'
-import Image from 'next/image'
+
 import styles from '../styles/components/Information.module.scss'
-import { calculateHrsAndMin } from '../utils/calculateTime'
+import { getHoursAndMinutes } from '../utils/calculateTime'
+import { FiSun, FiSunset } from 'react-icons/fi'
+import { BiTimeFive } from 'react-icons/bi'
+import { GiCampCookingPot } from 'react-icons/gi'
 
 export default function Information() {
-  const { lunch, morning, afternoon, totalTime } = useContext(ControlContext)
+  const { lunch, morning, afternoon, verify } = useContext(ControlContext)
+  const totalTime = getHoursAndMinutes(morning + afternoon)
 
   return (
     <section className={styles.information}>
       <h2>Informações</h2>
 
-      <figure>
-        <Image
-          height={42}
-          width={42}
-          src='/icons/morning.svg'
-          alt='Morning Icon'
-        />
-        <figcaption>
-          <strong>Manhã: </strong>
-          {calculateHrsAndMin(morning)}
-        </figcaption>
-      </figure>
+      <div>
+        <p>
+          <FiSun color='yellow' />
+          <span>
+            <strong>Manhã: </strong>
+            {verify === 4 && getHoursAndMinutes(morning)}
+          </span>
+        </p>
+      </div>
 
-      <figure>
-        <Image height={42} width={42} src='/icons/lunch.svg' alt='Lunch Icon' />
-        <figcaption>
-          <strong>Almoço: </strong>
-          {calculateHrsAndMin(lunch)}
-        </figcaption>
-      </figure>
+      <div>
+        <p>
+          <GiCampCookingPot color='lightgreen' />
+          <span>
+            <strong>Almoço: </strong>
+            {verify === 4 && getHoursAndMinutes(lunch)}
+          </span>
+        </p>
+      </div>
 
-      <figure>
-        <Image
-          height={42}
-          width={42}
-          src='/icons/sunset.svg'
-          alt='Sunset Icon'
-        />
-        <figcaption>
-          <strong>Tarde: </strong>
-          {calculateHrsAndMin(afternoon)}
-        </figcaption>
-      </figure>
+      <div>
+        <p>
+          <FiSunset color='lightsalmon' />
+          <span>
+            <strong>Tarde: </strong>
+            {verify === 4 && getHoursAndMinutes(afternoon)}
+          </span>
+        </p>
+      </div>
 
-      <figure>
-        <Image
-          height={42}
-          width={42}
-          src='/icons/chronometer.svg'
-          alt='Chronometer Icon'
-        />
-        <figcaption>
-          <strong>Horas total:</strong> {totalTime}
-        </figcaption>
-      </figure>
+      <div>
+        <p>
+          <BiTimeFive color='lightblue' />
+          <span>
+            <strong>Horas total: </strong>
+            {verify === 4 && totalTime}
+          </span>
+        </p>
+      </div>
     </section>
   )
 }

@@ -1,16 +1,25 @@
 @import "../functions.scss";
+@import "../colors.scss";
 
 .information {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 45px 1fr 1fr 1fr 1fr;
+  div {
+    @include DisplayFlex(row, center, center);
+    margin: 0.8rem 0;
+    width: auto;
 
-  figure {
-    @include DisplayFlex(column, center, center);
-    width: 100%;
+    p {
+      @include DisplayFlex(column, center, center);
 
-    img {
-      @include HeightWidth(32px, 32px);
+      svg {
+        @include HeightWidth(22px, 22px);
+      }
+    }
+  }
+
+  span {
+    strong {
+      color: $text;
+      font-weight: 600;
     }
   }
 }

@@ -4,6 +4,9 @@
 .inputBlock {
   @include DisplayFlex(row, center, space-between);
 
+  label {
+  }
+
   input {
     max-width: 6rem;
     height: 20px;
@@ -14,6 +17,7 @@
     border: none;
     border-radius: 0;
     border-bottom: 1px solid black;
+    background-color: $white;
 
     &:focus {
       border: none;

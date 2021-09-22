@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-import {
-  IoIosArrowDroprightCircle,
-  IoIosArrowDropdownCircle
-} from 'react-icons/io'
+import { IoIosArrowDroprightCircle } from 'react-icons/io'
 
 import styles from '../styles/components/SelectInput.module.scss'
 
@@ -13,20 +10,19 @@ type SelectInputType = {
 
 export default function SelectInput({ setDate }: SelectInputType) {
   const [selectedOption, setSelectedOption] = useState(0)
+  const options = [0, 1, 2, 3, 4, 5, 6, 7]
 
   const showDate = (days: number) => {
     moment.locale('pt')
-    return moment().subtract(days, 'days').format('ddd - DD MMMM - YYYY')
+    return moment().subtract(days, 'days').format('DD MMMM - ddd')
   }
-
-  useEffect(() => setDate(showDate(0)), [])
-
-  const options = [0, 1, 2, 3, 4, 5, 6, 7]
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(Number(e.target.value))
     setDate(showDate(Number(e.target.value)))
   }
+
+  useEffect(() => setDate(showDate(0)), [])
 
   return (
     <div className={styles.container}>
@@ -41,6 +37,7 @@ export default function SelectInput({ setDate }: SelectInputType) {
           </option>
         ))}
       </select>
+
       <span className={styles.icon}>
         <IoIosArrowDroprightCircle size={20} />
       </span>

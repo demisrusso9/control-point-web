@@ -8,10 +8,16 @@ type ControlMethods = {
   setMorningActivities: React.Dispatch<React.SetStateAction<string>>
   setAfternoonActivities: React.Dispatch<React.SetStateAction<string>>
 
+  toggleTheme?(): void
+  morningEntry?: string
+  morningExit?: string
+  afternoonEntry?: string
+  afternoonExit?: string
+
   lunch: number
   morning: number
   afternoon: number
-  totalTime: string
+  verify?: number
 }
 
 export const ControlContext = createContext({} as ControlMethods)
